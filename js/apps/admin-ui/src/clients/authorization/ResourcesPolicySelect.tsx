@@ -80,7 +80,7 @@ export const ResourcesPolicySelect = ({
   isRequired = false,
 }: ResourcesPolicySelectProps) => {
   const { realm } = useRealm();
-  const { t } = useTranslation("clients");
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const {
@@ -181,7 +181,9 @@ export const ResourcesPolicySelect = ({
         {field.value?.map((permissionId) => {
           const item = items.find(
             (permission) => permission.id === permissionId,
-          )!;
+          );
+
+          if (!item) return;
 
           const route = to(item);
           return (

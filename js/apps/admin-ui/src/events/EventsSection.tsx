@@ -59,7 +59,7 @@ type UserEventSearchForm = {
   dateTo: string;
   user: string;
   type: EventType[];
-  authIpAddress: string;
+  ipAddress: string;
 };
 
 const defaultValues: UserEventSearchForm = {
@@ -68,7 +68,7 @@ const defaultValues: UserEventSearchForm = {
   dateTo: "",
   user: "",
   type: [],
-  authIpAddress: "",
+  ipAddress: "",
 };
 
 const StatusRow = (event: EventRepresentation) =>
@@ -103,7 +103,7 @@ const DetailCell = (event: EventRepresentation) => (
 );
 
 const UserDetailLink = (event: EventRepresentation) => {
-  const { t } = useTranslation("events");
+  const { t } = useTranslation();
   const { realm } = useRealm();
 
   return (
@@ -126,7 +126,7 @@ const UserDetailLink = (event: EventRepresentation) => {
 };
 
 export default function EventsSection() {
-  const { t } = useTranslation("events");
+  const { t } = useTranslation();
   const { realm } = useRealm();
   const formatDate = useFormatDate();
   const [key, setKey] = useState(0);
@@ -143,7 +143,7 @@ export default function EventsSection() {
     dateTo: t("dateTo"),
     user: t("userId"),
     type: t("eventType"),
-    authIpAddress: t("ipAddress"),
+    ipAddress: t("ipAddress"),
   };
 
   const {
@@ -382,7 +382,7 @@ export default function EventsSection() {
                 <KeycloakTextInput
                   id="kc-ipAddress"
                   data-testid="ipAddress-searchField"
-                  {...register("authIpAddress")}
+                  {...register("ipAddress")}
                 />
               </FormGroup>
               <ActionGroup>
@@ -454,7 +454,7 @@ export default function EventsSection() {
   return (
     <>
       <ViewHeader
-        titleKey="events:title"
+        titleKey="titleEvents"
         subKey={
           <Trans i18nKey="events:eventExplain">
             If you want to configure user events, Admin events or Event
@@ -489,7 +489,7 @@ export default function EventsSection() {
                   },
                 ]}
                 isPaginated
-                ariaLabelKey="events:title"
+                ariaLabelKey="titleEvents"
                 toolbarItem={userEventSearchFormDisplay()}
                 columns={[
                   {

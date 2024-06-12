@@ -38,7 +38,7 @@ type ExecutionConfigModalProps = {
 export const ExecutionConfigModal = ({
   execution,
 }: ExecutionConfigModalProps) => {
-  const { t } = useTranslation("authentication");
+  const { t } = useTranslation();
   const { addAlert, addError } = useAlerts();
 
   const [show, setShow] = useState(false);
@@ -100,9 +100,8 @@ export const ExecutionConfigModal = ({
           alias: changedConfig.alias,
           config: changedConfig.config,
         };
-        const { id } = await adminClient.authenticationManagement.createConfig(
-          newConfig,
-        );
+        const { id } =
+          await adminClient.authenticationManagement.createConfig(newConfig);
         setConfig({ ...newConfig.config, id, alias: newConfig.alias });
       }
       addAlert(t("configSaveSuccess"), AlertVariant.success);
